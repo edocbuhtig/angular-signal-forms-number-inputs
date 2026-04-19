@@ -1,0 +1,52 @@
+<div class="form-container">
+  <h2>Sign Up</h2>
+  <form>
+    
+    <label>
+      Username
+      <input type="text" [formField]="signupForm.username" />
+    </label>
+    @if (signupForm.username().touched() && signupForm.username().invalid()) {
+      <ul>
+        @for (error of signupForm.username().errors(); track error.kind) {
+          <li>{{ error.message }}</li>
+        }
+      </ul>
+    }
+  
+    <label>
+      Email
+      <input type="email" [formField]="signupForm.email" />
+    </label>
+    @if (signupForm.email().touched() && signupForm.email().invalid()) {
+      <ul>
+        @for (error of signupForm.email().errors(); track error.kind) {
+          <li>{{ error.message }}</li>
+        }
+      </ul>
+    }
+
+    <label>
+      Age
+
+          <input
+        type="text"
+        inputmode="numeric"
+        [formField]="signupForm.age"
+        (keydown)="onAgeKeydown($event)"
+      />
+
+    </label>
+    @if (signupForm.age().touched() && signupForm.age().invalid()) {
+      <ul>
+        @for (error of signupForm.age().errors(); track error.kind) {
+          <li>{{ error.message }}</li>
+        }
+      </ul>
+    }
+  
+    <button type="submit" [disabled]="signupForm().invalid()">Sign Up</button>
+  </form>
+
+  <pre>{{ model() | json }}</pre>
+</div>
